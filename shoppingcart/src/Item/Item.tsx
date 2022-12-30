@@ -21,7 +21,7 @@ const Item: React.FC<Props> = ({ item, cartadd }) => (
             <p>{item.description}</p>
             <h3>Rs.{item.price}</h3>
         </div>
-        <Button onClick={() => cartadd(item)}> Add </Button>
+        <Button onClick={() => cartadd(item)}> Add2cart </Button>
     </Wrapper>
 );
 

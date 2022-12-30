@@ -2,11 +2,11 @@ import { useState } from "react";
 import { useQuery } from "react-query";
 import Item from "./Item/Item";
 //here are the components
-import Drawer from '@mui/material/Drawer'
-import LinearProgress from "@mui/material/LinearProgress";
-import Grid from "@mui/material/Grid";
-import AddShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { Badge } from "@mui/material";
+import { Drawer } from "@mui/material";
+import { LinearProgress } from "@mui/material";
+import { Grid } from "@mui/material";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart"
+import { Badge } from "@mui/icons-material";
 
 import { Wrapper } from "./Appstyles";
 
@@ -25,11 +25,11 @@ export type Shopitemtype = {
   amount: number;
 }
 
-const getproducts = async (): Promise<Shopitemtype[]> => await (await fetch('https://fakestoreapi.com/products')).json();
+const getpro = async (): Promise<Shopitemtype[]> => await (await fetch('https://fakestoreapi.com/products')).json();
 
 
 const App = () => {
-  const { data, isLoading, error } = useQuery<Shopitemtype[]>('products', getproducts
+  const { data, isLoading, error } = useQuery<Shopitemtype[]>('products', getpro
   );
   console.log(data)
 
@@ -38,24 +38,24 @@ const App = () => {
   const cartadd = (clicky: Shopitemtype) => null;
   const cartremove = () => null;
 
-  if (isLoading) return <LinearProgress />
+  if (isLoading) return <LinearProgress />;
 
-  if (error) return <div> Error encountered </div>
+  if (error) return <div> Error encountered </div>;
 
   //?cuzitmay be undefined
   return (
-    <Wrapper>
-      <Grid container spacing={3}>
 
-        {data?.map(item => (
-          <Grid item key={item.id} xs={12} sm={4}>
-            <Item item={item} cartadd={cartadd} />
-          </Grid>
-        )
-        )}
-      </Grid>
-    </Wrapper>
-  )
-}
+    <Grid container spacing={3}>
+
+      {data?.map(item => (
+        <Grid item key={item.id} xs={12} sm={4}>
+          <Item item={item} cartadd={cartadd} />
+        </Grid>
+      )
+      )}
+    </Grid>
+
+  );
+};
 
 export default App;
