@@ -6,9 +6,10 @@ import { Drawer } from "@mui/material";
 import { LinearProgress } from "@mui/material";
 import { Grid } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart"
-import { Badge } from "@mui/icons-material";
+import Badge from '@mui/material/Badge';
 
-import { Wrapper } from "./Appstyles";
+//styles here
+import { Wrapper, Styledbutton } from "./Appstyles";
 
 //don't need to rerender hence its outside APP
 
@@ -29,12 +30,15 @@ const getpro = async (): Promise<Shopitemtype[]> => await (await fetch('https://
 
 
 const App = () => {
+  const [cartopen, setcartopen] = useState(false);
+  const [cartitems, setcartitems] = useState([] as Shopitemtype[]);
+
   const { data, isLoading, error } = useQuery<Shopitemtype[]>('products', getpro
   );
   console.log(data)
 
 
-  const carttotal = () => null;
+  const carttotal = (items: Shopitemtype[]) => null;
   const cartadd = (clicky: Shopitemtype) => null;
   const cartremove = () => null;
 
@@ -42,19 +46,28 @@ const App = () => {
 
   if (error) return <div> Error encountered </div>;
 
-  //?cuzitmay be undefined
+  //'?'cuzitmay be undefined
   return (
+    <Wrapper>
+      <Drawer anchor="right" open={cartopen} onClick={() => setcartopen(false)}>
+        Uzi paisa chaina
+      </Drawer>
+      <Styledbutton onClick={() => setcartopen(true)}>
+        <Badge badgeContent={carttotal(cartitems)} color='error'>
+          <AddShoppingCartIcon />
+        </Badge>
 
-    <Grid container spacing={3}>
+      </Styledbutton>
+      <Grid container spacing={3}>
 
-      {data?.map(item => (
-        <Grid item key={item.id} xs={12} sm={4}>
-          <Item item={item} cartadd={cartadd} />
-        </Grid>
-      )
-      )}
-    </Grid>
-
+        {data?.map(item => (
+          <Grid item key={item.id} xs={12} sm={4}>
+            <Item item={item} cartadd={cartadd} />
+          </Grid>
+        )
+        )}
+      </Grid>
+    </Wrapper>
   );
 };
 
