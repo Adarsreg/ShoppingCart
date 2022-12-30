@@ -19,7 +19,7 @@ const Item: React.FC<Props> = ({ item, cartadd }) => (
         <div>
             <h3>{item.title}</h3>
             <p>{item.description}</p>
-            <h3>Rs.{item.price}</h3>
+            <h3>Rs.{(item.price * 80).toFixed(0)}</h3>
         </div>
         <Button onClick={() => cartadd(item)}> Add2cart </Button>
     </Wrapper>
