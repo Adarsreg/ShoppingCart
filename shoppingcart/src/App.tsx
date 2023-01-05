@@ -50,7 +50,7 @@ const App = () => {
   return (
     <Wrapper>
       <Drawer anchor="right" open={cartopen} onClick={() => setcartopen(false)}>
-        Uzi paisa chaina
+        Sidebar
       </Drawer>
       <Styledbutton onClick={() => setcartopen(true)}>
         <Badge badgeContent={carttotal(cartitems)} color='error'>
