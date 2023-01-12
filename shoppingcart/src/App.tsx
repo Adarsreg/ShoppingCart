@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useQuery } from "react-query";
 import Item from "./Item/Item";
 //here are the components
+import Cart from "./Cart/Cart";
 import { Drawer } from "@mui/material";
 import { LinearProgress } from "@mui/material";
 import { Grid } from "@mui/material";
@@ -31,14 +32,15 @@ const getpro = async (): Promise<Shopitemtype[]> => await (await fetch('https://
 
 const App = () => {
   const [cartopen, setcartopen] = useState(false);
-  const [cartitems, setcartitems] = useState([] as Shopitemtype[]);
+  const [cartItems, setcartItems] = useState([] as Shopitemtype[]);
 
   const { data, isLoading, error } = useQuery<Shopitemtype[]>('products', getpro
   );
   console.log(data)
 
 
-  const carttotal = (items: Shopitemtype[]) => null;
+  const carttotal = (items: Shopitemtype[]) => items.reduce((ack: number, item) =>
+    ack + item.amount, 0);
   const cartadd = (clicky: Shopitemtype) => null;
   const cartremove = () => null;
 
@@ -50,10 +52,11 @@ const App = () => {
   return (
     <Wrapper>
       <Drawer anchor="right" open={cartopen} onClick={() => setcartopen(false)}>
-        Sidebar
+        <Cart cartItems={cartItems} addtocart={cartadd}
+          removefromcart={cartremove} />
       </Drawer>
       <Styledbutton onClick={() => setcartopen(true)}>
-        <Badge badgeContent={carttotal(cartitems)} color='error'>
+        <Badge badgeContent={carttotal(cartItems)} color='error'>
           <AddShoppingCartIcon />
         </Badge>
 

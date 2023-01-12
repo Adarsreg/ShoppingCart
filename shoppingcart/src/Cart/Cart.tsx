@@ -10,12 +10,12 @@ type Props = {
     removefromcart: (id: number) => void;
 };
 
-const Cart: React.FC<Props> = ({ cartitems, addtocart, removefromcart }) => {
+const Cart: React.FC<Props> = ({ Cartitems, addtocart, removefromcart }) => {
     return (
         <Wrapper>
             <h2>Your Shopping Cart</h2>
-            {cartitems.length === 0 ? <p>No items in cart.</p> : null}
-            {cartitems.map(item => (
+            {Cartitems.length === 0 ? <p>No items in cart.</p> : null}
+            {Cartitems.map(item => (
                 <Cartitem />
             ))}
         </Wrapper>
