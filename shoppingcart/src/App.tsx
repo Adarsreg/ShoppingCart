@@ -41,7 +41,20 @@ const App = () => {
 
   const carttotal = (items: Shopitemtype[]) => items.reduce((ack: number, item) =>
     ack + item.amount, 0);
-  const cartadd = (clicky: Shopitemtype) => null;
+  const cartadd = (clicky: Shopitemtype) => {
+    setcartItems(prev => {
+      const isIteminCart = prev.find(item => item.id === clicky.id);
+
+      if (isIteminCart) {
+        return prev.map(item =>
+          item.id === clicky.id
+            ? { ...item, amount: item.amount + 1 }
+            : item
+        );
+      }
+      return [...prev, { ...clicky, amount: 1 }];
+    });
+  };
   const cartremove = () => null;
 
   if (isLoading) return <LinearProgress />;
