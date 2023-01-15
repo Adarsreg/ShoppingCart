@@ -55,7 +55,19 @@ const App = () => {
       return [...prev, { ...clicky, amount: 1 }];
     });
   };
-  const cartremove = () => null;
+  const cartremove = (id: number) => {
+    setcartItems(prev =>
+      prev.reduce((ack, item) => {
+        if (item.id === id) {
+          if (item.amount === 1) return ack;
+          return [...ack, { ...item, amount: item.amount - 1 }];
+
+        } else {
+          return [...ack, item];
+        }
+      }, [] as Shopitemtype[])
+    );
+  };
 
   if (isLoading) return <LinearProgress />;
 
@@ -63,8 +75,9 @@ const App = () => {
 
   //'?'cuzitmay be undefined
   return (
-    <Wrapper>
-      <Drawer anchor="right" open={cartopen} onClick={() => setcartopen(false)}>
+    //<Wrapper>
+    <div>
+      <Drawer anchor="right" open={cartopen} onClose={() => setcartopen(false)}>
         <Cart cartItems={cartItems} addtocart={cartadd}
           removefromcart={cartremove} />
       </Drawer>
@@ -83,7 +96,8 @@ const App = () => {
         )
         )}
       </Grid>
-    </Wrapper>
+    </div>
+    //</Wrapper>
   );
 };
 
