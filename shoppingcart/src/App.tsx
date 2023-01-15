@@ -75,8 +75,8 @@ const App = () => {
 
   //'?'cuzitmay be undefined
   return (
-    //<Wrapper>
-    <div>
+    <Wrapper>
+
       <Drawer anchor="right" open={cartopen} onClose={() => setcartopen(false)}>
         <Cart cartItems={cartItems} addtocart={cartadd}
           removefromcart={cartremove} />
@@ -96,8 +96,8 @@ const App = () => {
         )
         )}
       </Grid>
-    </div>
-    //</Wrapper>
+
+    </Wrapper>
   );
 };
 

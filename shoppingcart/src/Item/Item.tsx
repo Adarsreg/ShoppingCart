@@ -14,6 +14,7 @@ type Props = {
 //type for react functional component
 
 const Item: React.FC<Props> = ({ item, cartadd }) => (
+
     <Wrapper>
         <img src={item.image} alt={item.title} />
         <div>
