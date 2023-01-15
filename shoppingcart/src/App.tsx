@@ -78,8 +78,8 @@ const App = () => {
     <Wrapper>
 
       <Drawer anchor="right" open={cartopen} onClose={() => setcartopen(false)}>
-        <Cart cartItems={cartItems} addtocart={cartadd}
-          removefromcart={cartremove} />
+        <Cart cartItems={cartItems} cartadd={cartadd}
+          cartremove={cartremove} />
       </Drawer>
       <Styledbutton onClick={() => setcartopen(true)}>
         <Badge badgeContent={carttotal(cartItems)} color='error'>

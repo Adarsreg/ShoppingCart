@@ -22,11 +22,29 @@ const Cartitem: React.FC<Props> = ({ item, cartadd, cartremove }) => (
             <div className="information">
                 <p>Price: Rs.{item.price}</p>
                 <p>Total: Rs.{(item.amount * item.price).toFixed(2)}</p>
-
             </div>
-            ]
-
+            <div className='buttons'>
+                <Button
+                    size='small'
+                    disableElevation
+                    variant='contained'
+                    onClick={() => cartremove(item.id)}
+                >
+                    -
+                </Button>
+                <p>{item.amount}</p>
+                <Button
+                    size='small'
+                    disableElevation
+                    variant='contained'
+                    onClick={() => cartadd(item)}
+                >
+                    +
+                </Button>
+            </div>
         </div>
+        <img src={item.image} alt={item.title} />
+
 
     </Wrapper>
 );
