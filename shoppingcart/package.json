@@ -1,13 +1,10 @@
 {
-  "homepage": "http://Adarsreg.github.io/shoppingcart",
   "name": "shoppingcart",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "deploy": "gh-pages -d build",
-    "predeploy": "npm run build",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
